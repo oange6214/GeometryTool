@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\Image\Bezier.png" />
+	  <None Remove="Assets\Image\Circle.png" />
+	  <None Remove="Assets\Image\Color.png" />
+	  <None Remove="Assets\Image\Curve.png" />
+	  <None Remove="Assets\Image\cuxi.png" />
+	  <None Remove="Assets\Image\Down.png" />
+	  <None Remove="Assets\Image\DowntoUp.png" />
+	  <None Remove="Assets\Image\Ellipse.png" />
+	  <None Remove="Assets\Image\icon.png" />
+	  <None Remove="Assets\Image\Left.png" />
+	  <None Remove="Assets\Image\Line.png" />
+	  <None Remove="Assets\Image\lock.png" />
+	  <None Remove="Assets\Image\myCanvas.png" />
+	  <None Remove="Assets\Image\Pan.png" />
+	  <None Remove="Assets\Image\point.png" />
+	  <None Remove="Assets\Image\QBezier.png" />
+	  <None Remove="Assets\Image\Rectangular.png" />
+	  <None Remove="Assets\Image\Right.png" />
+	  <None Remove="Assets\Image\RighttoLeft.png" />
+	  <None Remove="Assets\Image\Triangle.png" />
+	  <None Remove="Assets\Image\TurnOver.png" />
+	  <None Remove="Assets\Image\unlock.png" />
+	  <None Remove="Assets\Image\Up.png" />
+	  <None Remove="Assets\Image\UptoDown.png" />
+	  <None Remove="Assets\Image\XuanZhuan.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Assets\Image\Bezier.png" />
+	  <Resource Include="Assets\Image\Circle.png" />
+	  <Resource Include="Assets\Image\Color.png" />
+	  <Resource Include="Assets\Image\Curve.png" />
+	  <Resource Include="Assets\Image\cuxi.png" />
+	  <Resource Include="Assets\Image\Down.png" />
+	  <Resource Include="Assets\Image\DowntoUp.png" />
+	  <Resource Include="Assets\Image\Ellipse.png" />
+	  <Resource Include="Assets\Image\icon.png" />
+	  <Resource Include="Assets\Image\Left.png" />
+	  <Resource Include="Assets\Image\Line.png" />
+	  <Resource Include="Assets\Image\lock.png" />
+	  <Resource Include="Assets\Image\myCanvas.png" />
+	  <Resource Include="Assets\Image\Pan.png" />
+	  <Resource Include="Assets\Image\point.png" />
+	  <Resource Include="Assets\Image\QBezier.png" />
+	  <Resource Include="Assets\Image\Rectangular.png" />
+	  <Resource Include="Assets\Image\Right.png" />
+	  <Resource Include="Assets\Image\RighttoLeft.png" />
+	  <Resource Include="Assets\Image\Triangle.png" />
+	  <Resource Include="Assets\Image\TurnOver.png" />
+	  <Resource Include="Assets\Image\unlock.png" />
+	  <Resource Include="Assets\Image\Up.png" />
+	  <Resource Include="Assets\Image\UptoDown.png" />
+	  <Resource Include="Assets\Image\XuanZhuan.png" />
+	</ItemGroup>
+	
+</Project>

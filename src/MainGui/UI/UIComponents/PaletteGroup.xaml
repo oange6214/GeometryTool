@@ -1,0 +1,357 @@
+﻿<UserControl
+    x:Class="MainGui.UIComponents.PaletteGroup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MainGui.UIComponents"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="root"
+    mc:Ignorable="d">
+
+    <Grid Background="#F1F1F1">
+        <StackPanel
+            ButtonBase.Click="Palette_Click"
+            Orientation="Vertical">
+            <!--  Current Color  -->
+            <Border Height="35">
+                <StackPanel
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Content="Current Color"
+                        SnapsToDevicePixels="True" />
+                    <Border
+                        BorderBrush="#CCC"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                        <Label
+                            x:Name="Lb_CurrentColor"
+                            Width="80"
+                            Height="18"
+                            Margin="2"
+                            Background="{Binding ElementName=root, Path=CurrentColor, Mode=TwoWay}" />
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!--  Palette group  -->
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <StackPanel
+                    Margin="2,0,0,0"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+
+                    <Button
+                        Background="#FFFFFF"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#000000"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#EEECE1"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#1F497D"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#4F81BD"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#C0504D"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#9BBB59"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#8064A2"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#4BACC6"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Background="#F79646"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="2,2,0,0"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#F2F2F2"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#7F7F7F"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#DDD9C3"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#C6D9F0"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#DBE5F1"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#F2DCDB"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#EBF1DD"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#E5E0EC"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#DBEEF3"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FDEADA"
+                        Style="{StaticResource Style.Button.ColorSecondRow}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="2,0,0,0"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#D8D8D8"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#595959"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#C4BD97"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#8DB3E2"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#b8cce4"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#E5B9D7"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#D7E3BC"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#CCC1D9"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#B7DDE8"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FBD5B5"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="2,0,0,0"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#BFBFBF"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#3F3F3F"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#938953"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#548DD4"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#95B3D7"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#D99694"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#C3D69B"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#B2A2C7"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#92CDDC"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FAC08F"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="2,0,0,0"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#A5A5A5"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#262626"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#494429"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#17365D"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#366092"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#953734"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#76923C"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#5F497A"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#31859B"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#E36C09"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="2,0,0,3"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#7F7F7F"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#0C0C0C"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#1D1B10"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#0F243E"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#244061"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#632423"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#4F6128"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#3F3151"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#205867"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#974806"
+                        Style="{StaticResource Style.Button.ColorButton}" />
+                </StackPanel>
+                <Label
+                    Content="Standard Color"
+                    FontSize="13"
+                    SnapsToDevicePixels="True" />
+                <StackPanel
+                    Margin="2,1,0,2"
+                    Orientation="Horizontal"
+                    SnapsToDevicePixels="True">
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#C00000"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FF0000"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FFC000"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#FFFF00"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#92D050"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#00B050"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#00B0f0"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#0070C0"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#002060"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                    <Button
+                        Margin="3,0,3,0"
+                        Background="#7030A0"
+                        Style="{StaticResource Style.Button.ColorFirstRow}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

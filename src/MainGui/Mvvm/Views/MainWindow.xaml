@@ -1,0 +1,583 @@
+﻿<Window
+    x:Class="MainGui.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UIElement="clr-namespace:MainGui.UIComponents"
+    xmlns:commnad="clr-namespace:MainGui.Mvvm.Commnads"
+    xmlns:converters="clr-namespace:MainGui.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:MainGui"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:service="clr-namespace:MainGui.Services"
+    xmlns:vm="clr-namespace:MainGui.Mvvm.ViewModels"
+    Title="MainWindow"
+    Width="1000"
+    Height="900"
+    MinWidth="1000"
+    MinHeight="900"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainVM}"
+    Icon="/Assets/Image/icon.png"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <converters:ToDoubleConverter x:Key="ToDoubleConverter" />
+        <converters:BorderWidthHeightConverter x:Key="BorderWidthHeightConverter" />
+        <converters:ScaleCenterConverter x:Key="ScaleCenterConverter" />
+        <converters:CanvasScaleTransformConverter x:Key="CanvasScaleTransformConverter" />
+
+        <RoutedUICommand
+            x:Key="Open"
+            Text="Open" />
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Command="{StaticResource Open}"
+            Gesture="Ctrl+O" />
+    </Window.InputBindings>
+
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="{StaticResource Open}"
+            Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
+
+
+    <Grid
+        x:Name="G_Root"
+        Background="#E3E7EA">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="230" />
+        </Grid.ColumnDefinitions>
+
+        <!--  ToolTip  -->
+        <TabControl
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Background="#F1F1F1">
+            <TabItem Header="File">
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        Click="OpenPNG_Click"
+                        Style="{StaticResource PulseButton}">
+                        <TextBlock
+                            Margin="20,0,0,0"
+                            FontSize="16"
+                            Text="Import"
+                            ToolTip="Import Background" />
+                    </Button>
+                    <Button
+                        x:Name="CreateNewCanvas"
+                        Command="commnad:RoutedCommands.NewCommand"
+                        Style="{StaticResource PulseButton}"
+                        ToolTip="Create File">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Create" />
+                    </Button>
+                    <Button
+                        Command="{StaticResource Open}"
+                        Style="{StaticResource PulseButton}"
+                        ToolTip="Open File">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Open File" />
+                    </Button>
+                    <Button
+                        Command="commnad:RoutedCommands.SaveCommand"
+                        Style="{StaticResource PulseButton}"
+                        ToolTip="Save File">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Save File" />
+                    </Button>
+                    <Button Style="{StaticResource PulseButton}">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Save As XML" />
+                    </Button>
+                    <Button
+                        Click="Save2PNG_Click"
+                        Style="{StaticResource PulseButton}">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Save As PNG" />
+                    </Button>
+                    <Button
+                        x:Name="SaveDrawingImage"
+                        Click="SaveDrawingImage_Click"
+                        Style="{StaticResource PulseButton}">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Save Drawing Image" />
+                    </Button>
+                    <Button
+                        x:Name="OpenDrawingImage"
+                        Click="OpenDrawingImage_Click"
+                        Style="{StaticResource PulseButton}">
+                        <TextBlock
+                            FontSize="16"
+                            Text="Open Drawing Image" />
+                    </Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem
+                Header="Graph"
+                IsSelected="True">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton
+                        x:Name="Select"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="Select"
+                        ToolTip="Select">
+                        <Image Source="/Assets/Image/Point.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="Point"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="Point"
+                        ToolTip="Add Line">
+                        <Image Source="/Assets/Image/Line.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="Triangle"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="AddTriangle"
+                        ToolTip="Add Triangle">
+                        <Image Source="/Assets/Image/Triangle.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="Rectangular"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="AddRectangular"
+                        ToolTip="Add Rectangular">
+                        <Image Source="/Assets/Image/Rectangular.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="Circle"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="AddCircle"
+                        ToolTip="Add Circle">
+                        <Image Source="/Assets/Image/Circle.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="AddEllipse"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="AddEllipse"
+                        ToolTip="Add Ellipse">
+                        <Image Source="/Assets/Image/Ellipse.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="QBezier"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="QBezier"
+                        ToolTip="Q Bezier">
+                        <Image Source="/Assets/Image/QBezier.png" />
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="Bezier"
+                        Click="Select_Click"
+                        GroupName="MouseAction"
+                        Style="{DynamicResource RadioButton}"
+                        Tag="Bezier"
+                        ToolTip="Bezier">
+                        <Image Source="/Assets/Image/Bezier.png" />
+                    </RadioButton>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Background="#F1F1F1"
+            BorderBrush="Black"
+            BorderThickness="1,0,0,1">
+
+            <!--  Brush Properties  -->
+            <StackPanel
+                x:Name="PanProperty"
+                Margin="7,0,0,0">
+
+                <!--  Title  -->
+                <StackPanel
+                    Margin="0,0,0,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Image
+                        Width="20"
+                        Source="/Assets/Image/Color.png" />
+                    <Label
+                        x:Name="NowSelectedLabel"
+                        Content="Brush Properties"
+                        FontSize="14"
+                        Foreground="#79AC2E" />
+                </StackPanel>
+
+                <!--  Palette Properties  -->
+                <TabControl Style="{StaticResource TabControlWithNoBorderStyle}">
+                    <!--  Line Color  -->
+                    <TabItem
+                        Header="Line Color"
+                        Style="{StaticResource RightTabItemStyle1}">
+                        <UIElement:PaletteGroup
+                            x:Name="LineColor"
+                            CurrentColor="{Binding Stroke, Mode=TwoWay}" />
+                    </TabItem>
+
+                    <!--  Fill Color  -->
+                    <TabItem
+                        Header="Fill Color"
+                        Style="{StaticResource RightTabItemStyle1}">
+                        <UIElement:PaletteGroup
+                            x:Name="FillColor"
+                            CurrentColor="{Binding Fill, Mode=TwoWay}" />
+                    </TabItem>
+                </TabControl>
+
+                <Line
+                    Stroke="#79AC2E"
+                    StrokeThickness="1.5"
+                    X1="6"
+                    X2="210"
+                    Y1="20"
+                    Y2="20" />
+
+                <!--  Line Properties  -->
+                <StackPanel
+                    Margin="0,10,0,0"
+                    Orientation="Vertical">
+
+                    <StackPanel
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="20"
+                            Source="/Assets/Image/cuxi.png" />
+                        <Label
+                            Content="Line Properties"
+                            FontSize="14"
+                            Foreground="#79AC2E" />
+                    </StackPanel>
+                    <Grid>
+                        <Line
+                            x:Name="L_LineStyle"
+                            Margin="0,-10,0,0"
+                            Stroke="Black"
+                            StrokeDashArray="{Binding StrokeDashArray, Mode=TwoWay}"
+                            StrokeThickness="{Binding StrokeThickness, Mode=TwoWay, Converter={StaticResource ToDoubleConverter}}"
+                            Visibility="Hidden"
+                            X1="25"
+                            X2="175"
+                            Y1="0"
+                            Y2="0" />
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Slider
+                                x:Name="SS_SliderStyle"
+                                Width="180"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsSnapToTickEnabled="True"
+                                Maximum="30"
+                                Minimum="1"
+                                ValueChanged="SliderStyle_ValueChanged" />
+                            <Label Content="{Binding ElementName=SS_SliderStyle, Path=Value, Mode=TwoWay}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Slider
+                            x:Name="SD_StrokeDash1"
+                            Width="180"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsSnapToTickEnabled="True"
+                            Maximum="10"
+                            Minimum="1"
+                            ValueChanged="StrokeDash1_ValueChanged" />
+                        <Label Content="{Binding ElementName=SD_StrokeDash1, Path=Value, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Slider
+                            x:Name="SD_StrokeDash2"
+                            Width="180"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsSnapToTickEnabled="True"
+                            Maximum="10"
+                            Minimum="0"
+                            ValueChanged="StrokeDash2_ValueChanged" />
+                        <Label Content="{Binding ElementName=SD_StrokeDash2, Path=Value, Mode=TwoWay}" />
+                    </StackPanel>
+
+                </StackPanel>
+
+                <Line
+                    Stroke="#79AC2E"
+                    StrokeThickness="1.5"
+                    X1="6"
+                    X2="210"
+                    Y1="20"
+                    Y2="20" />
+
+                <!--  Graphics Operations  -->
+                <StackPanel
+                    Margin="0,10,0,0"
+                    Orientation="Vertical">
+
+                    <StackPanel
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="20"
+                            Source="/Assets/Image/TurnOver.png" />
+                        <Label
+                            Content="Graphics Operations"
+                            FontSize="14"
+                            Foreground="#79AC2E" />
+                    </StackPanel>
+
+                    <TabControl Style="{StaticResource TabControlWithNoBorderStyle}">
+                        <TabItem
+                            Header="Mirror"
+                            Style="{StaticResource RightTabItemStyle1}">
+                            <Grid Background="#F1F1F1">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="TopMirror_Click"
+                                            Source="/Assets/Image/Up.png" />
+                                    </Button>
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="BottomMirror_Click"
+                                            Source="/Assets/Image/Down.png" />
+                                    </Button>
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="LeftMirror_Click"
+                                            Source="/Assets/Image/Left.png" />
+                                    </Button>
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="RightMirror_Click"
+                                            Source="/Assets/Image/Right.png" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem
+                            Header="Rotate"
+                            Style="{StaticResource RightTabItemStyle2}">
+                            <Grid Background="#F1F1F1">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="{x:Null}"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="VerticalOverturn_Click"
+                                            Source="/Assets/Image/DowntoUp.png" />
+                                    </Button>
+                                    <Button
+                                        Width="30"
+                                        Margin="10,0"
+                                        Style="{StaticResource Style.Button.ButtonImage}">
+                                        <Image
+                                            VerticalAlignment="Center"
+                                            MouseLeftButtonDown="HorizontalOverturn_Click"
+                                            Source="/Assets/Image/RighttoLeft.png" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+
+                <Line
+                    Stroke="#79AC2E"
+                    StrokeThickness="1.5"
+                    X1="6"
+                    X2="210"
+                    Y1="20"
+                    Y2="20" />
+
+                <!--  Artboard Settings  -->
+                <StackPanel
+                    Margin="0,10,0,0"
+                    Orientation="Vertical">
+                    <StackPanel
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="20"
+                            Source="/Assets/Image/MyCanvas.png" />
+                        <Label
+                            Content="Artboard Settings"
+                            Foreground="#79AC2E" />
+                    </StackPanel>
+
+                    <Label
+                        Content="Size"
+                        SnapsToDevicePixels="True" />
+
+                    <ComboBox
+                        x:Name="CB_GridSizeCombobox"
+                        Width="200"
+                        SelectionChanged="CB_GridSizeCombobox_SelectionChanged">
+                        <ComboBoxItem Tag="16">16*16</ComboBoxItem>
+                        <ComboBoxItem Tag="24">24*24</ComboBoxItem>
+                        <ComboBoxItem Tag="32">32*32</ComboBoxItem>
+                        <ComboBoxItem Tag="48">48*48</ComboBoxItem>
+                        <ComboBoxItem Tag="64">64*64</ComboBoxItem>
+                        <ComboBoxItem Tag="100">100*100</ComboBoxItem>
+                        <ComboBoxItem Tag="128">128*128</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label
+                        Content="Background"
+                        SnapsToDevicePixels="True" />
+
+                    <ComboBox
+                        x:Name="CB_RootCanvasBackGround"
+                        Width="200"
+                        SelectionChanged="RootCanvasBackGround_SelectionChanged">
+                        <ComboBoxItem Tag="Grid">Grid</ComboBoxItem>
+                        <ComboBoxItem Tag="PNG">PNG</ComboBoxItem>
+                        <ComboBoxItem Tag="None">None</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label
+                        Content="Background"
+                        SnapsToDevicePixels="True" />
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Slider
+                            x:Name="SD_CanvasChange"
+                            Width="180"
+                            IsSnapToTickEnabled="True"
+                            Maximum="50"
+                            Minimum="1"
+                            ValueChanged="SD_CanvasChange_ValueChanged" />
+                        <Label Content="{Binding ElementName=SD_CanvasChange, Path=Value}" />
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+        <!--  Draw Borad  -->
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
+            <Border
+                x:Name="CanvasBorder"
+                Width="{Binding ElementName=G_Root, Path=ActualWidth, Converter={StaticResource BorderWidthHeightConverter}, ConverterParameter=215}"
+                Height="{Binding ElementName=G_Root, Path=ActualHeight, Converter={StaticResource BorderWidthHeightConverter}, ConverterParameter=115}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Canvas
+                    x:Name="BackGroundCanvas"
+                    Margin="0,40,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                    <Canvas
+                        x:Name="RootCanvas"
+                        Width="64"
+                        Height="64"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        MouseDown="RootCanvas_MouseDown"
+                        MouseLeftButtonDown="RootCanvas_MouseLeftButtonDown"
+                        MouseLeftButtonUp="RootCanvas_MouseLeftButtonUp"
+                        MouseMove="RootCanvas_MouseMove"
+                        MouseRightButtonDown="RootCanvas_MouseRightButtonDown">
+                        <Canvas.RenderTransform>
+                            <ScaleTransform x:Name="CanvasScaleTsf" CenterX="{Binding ElementName=RootCanvas, Path=Width, Converter={StaticResource ScaleCenterConverter}}" CenterY="0" ScaleX="{Binding ElementName=SD_CanvasChange, Path=Value, Converter={StaticResource CanvasScaleTransformConverter}}" ScaleY="{Binding ElementName=SD_CanvasChange, Path=Value, Converter={StaticResource CanvasScaleTransformConverter}}" />
+                        </Canvas.RenderTransform>
+                        <Canvas.ContextMenu>
+                            <ContextMenu x:Name="MenuOptions">
+                                <MenuItem
+                                    Command="commnad:RoutedCommands.PasteCommand"
+                                    Header="Paste"
+                                    IsEnabled="{Binding Path=CanPaste}" />
+                            </ContextMenu>
+                        </Canvas.ContextMenu>
+                    </Canvas>
+                </Canvas>
+            </Border>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
